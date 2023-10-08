@@ -73,3 +73,165 @@ export default Home;
         <h2>You are not male</h2>
     }
 ```
+
+### Looping inside JSX
+- Looping array
+```JavaScript
+const Home = () => {
+     const fruits = ["Apple","Banana","Orange","Lemon","Cocunut"];
+    return (
+        <div style={{padding:"50px"}}>
+            <h2>List Of fruits</h2>
+           <ul>
+            {
+                fruits.map(fruit => <li>{fruit} </li>) 
+            }
+           </ul>
+        </div>
+    );
+};
+export default Home;
+```
+### Why use map in JSX?
+### Conditional Rendaring using Switch statement of JavaScript.
+```JavaScript
+const Login = () => {
+    const user = true;
+    switch(user){
+        case true:
+            return <div>
+                <h2>Welcome to our application</h2>
+            </div>
+        case false:
+            return <h3>You're not valid user !</h3>;
+        default:
+            return <h3>Try Again</h3> 
+    }
+};
+export default Login;
+```
+- Using switch() we beign able to apply multiple condition.
+
+### Conditional Rendering using logical &&
+- If you want can use handler function 
+```JavaScript
+    const Logout = () => {
+    const user = "loggedIn";
+    return (
+        <div>
+            {
+                user&&
+                <div>
+                    <h2>Access</h2>
+                </div>
+            }
+        </div>
+    );
+};
+export default Logout;
+```
+- If condition is true the execute block of code.
+
+### Conditional rendering Immidiately invoke function.
+- Syntax { (
+    ()=>{}
+    )() }
+```JavaScript
+const Result = () => {
+    const mark= 70;
+    return (
+        <div>
+            {
+                (()=>{
+                    if(mark >= 80 && mark <=100){
+                        return <h2>You have got GPA 5</h2>
+                    }
+                    else if(mark >=70 && mark <= 79){
+                        return <h2>You have got GPA 4</h2>
+                    }
+                    else if(mark >= 60 && mark <= 69){
+                        return <h2>You have got GPA 3.5</h2>
+                    }
+                    else{
+                        return <h2>Sorroy show your result</h2>
+                    }
+                })()
+            }
+        </div>
+    );
+};
+export default Result;
+```
+
+### Passing props to a component
+- props stands for "properties"
+- props is used to passing data from one component to another component.
+- passin data in uni-directional fllow [parent to child]
+GrandFather > Father > Child> Grand Child ..
+- props data read-only
+- parent can't change the data of child component
+
+### Using props passing simple data
+```JavaScript
+    <div>
+            <ViewRsult time={ new Date().getTime()}></ViewRsult>
+     </div>
+
+    const ViewRsult = (props) => {
+    return (
+        <div style={{padding:"50px"}}>
+          <h3>Time: {props.time}</h3> 
+        </div>
+    );
+};
+```
+
+### Using props passing function
+```JavaScript
+    const Home = () => {
+    const alertMessage = ()=>{
+        alert("Hello! What's up guy ");
+    }
+    return (
+        <div>
+            <ViewRsult alertMessage={alertMessage}></ViewRsult>
+        </div>
+    );
+};
+
+const ViewRsult = (props) => {
+    return (
+        <div  style={{padding:"50px"}}>
+          <button onClick={props.alertMessage}>Show Me</button>
+        </div>
+    );
+};
+```
+
+### Responding to event
+```JavaScript
+    <button onClick={()=>{
+                alert("I'm home component");
+            }}>Click Me</button>
+```
+_ We can write any kind of JavaScript code. like eventhadler
+
+### Prevent default form submission
+```JavaScript
+const ViewRsult = () => {
+    const submitForm = (e) =>{
+        e.preventDefault();
+        alert("Click Me");
+    }
+    return (
+       <div>
+            <form onSubmit={submitForm}>
+                <input type="text" />
+                <button>Submit</button>
+            </form>
+       </div>
+    );
+};
+```
+- Whenever we click on the submit button each time form is laoding again that's call prevent default behavior of form
+- Now stop the default form behevior fllowing above snippet code.
