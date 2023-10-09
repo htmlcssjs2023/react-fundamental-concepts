@@ -8,6 +8,8 @@ import './index.css'
 import Main from './components/layout/Main';
 import Home from './components/Home/Home';
 import ViewRsult from './components/ViewResult/ViewRsult';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const router = createBrowserRouter([

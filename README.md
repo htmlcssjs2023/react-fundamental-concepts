@@ -235,3 +235,149 @@ const ViewRsult = () => {
 ```
 - Whenever we click on the submit button each time form is laoding again that's call prevent default behavior of form
 - Now stop the default form behevior fllowing above snippet code.
+
+### useRef() method - changin html element
+```JavaScript
+    const ViewRsult = () => {
+    let userId = document.getElementById("userId");
+    console.log(userId);
+    return (
+       <div>
+          <h2 id="userId"></h2> 
+       </div>
+    );
+};
+
+- Instead of above code snippet to be following code
+import React, { useRef } from 'react';
+const ViewRsult = () => {
+    let userId = useRef();
+    const user = () =>{
+        userId.innerHTML = `
+            <ul>
+                <li>Apple</li>
+                <li>Banana</li>
+                <li>Orange</li>
+            </ul>
+        `;
+    }
+    
+    return (
+       <div style={{padding:"50px"}}>
+          <h2 ref={
+            h2 => userId = h2
+          }></h2> 
+
+          <button onClick={user}>Show</button>
+       </div>
+    );
+};
+
+export default ViewRsult;
+```
+
+### Chage the existing attribue value using useRef() method.
+```JavaScript
+    let userId = useRef();
+    const user = () =>{
+       userId.current.src="https://placehold.co/600x400/orange/white";
+    }
+
+    return (
+       <div style={{padding:"50px"}}>
+         <img src="https://placehold.co/600x400" alt="" ref={userId} /> <br />
+          <button onClick={user}>Show</button>
+       </div>
+    );
+```
+
+### Set new attribute using useRef() method
+```JavaScript
+    let userId = useRef();
+    const user = () =>{
+       userId.current.src="https://placehold.co/600x400/orange/white";
+       userId.current.setAttribute("height","200px");
+       userId.current.setAttribute("width","300px");
+    }
+
+    return (
+       <div style={{padding:"50px"}}>
+         <img src="https://placehold.co/600x400" alt="" ref={userId} /> <br />
+          <button onClick={user}>Show</button>
+       </div>
+    );
+```
+### How to pick the input field value using useRef();
+```JavaScript
+import React, { useRef } from 'react';
+const ViewRsult = () => {
+    let firstName,lastName = useRef();
+    const pickInputValue = ()=>{
+        const fName = firstName.value;
+        const lName = lastName.value;
+
+        alert(fName + " " + lName);
+    }
+
+    return (
+       <div style={{padding:"50px"}}>
+            <form action="#">
+                <input ref={(v)=>firstName=v} type="text" placeholder='First Name' /> <br />
+                <input ref={(v)=>lastName=v} type="text" placeholder='Last Name' /> <br />
+                <button onClick={pickInputValue} type='submit'>Submit</button>
+            </form>
+       </div>
+    );
+};
+export default ViewRsult;
+```
+
+### Add CSS class using useRef() method
+```JavaScript
+import React, { useRef } from 'react';
+const ViewRsult = () => {
+    const heroContainer = useRef();
+    const themColorMode = useRef();
+
+    const changeColorMode = ()=>{
+       heroContainer.current.classList.remove('bg-success');
+       heroContainer.current.classList.add('text-danger')
+    }
+    const themMode = ()=>{
+      themColorMode.current.classList.add('bg-success-subtle');
+    }
+
+    return (
+       <div style={{padding:"50px"}} ref={themColorMode}>
+            <div ref={heroContainer} className="bg-success">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere mollitia nostrum inventore non accusantium, quam doloribus quaerat illum sapiente, consequatur sint aliquam in soluta saepe doloremque voluptate quae optio impedit.</p>
+            </div>
+            <button className='btn btn-primary' onClick={changeColorMode}>Change Mode</button>
+            <button className='btn btn-secondary'  onClick={themMode} ref={themColorMode}>Mode</button>
+       </div>
+    );
+};
+
+export default ViewRsult;
+```
+- install bootstrap
+- [bootstrap](https://www.npmjs.com/package/bootstrap)
+- use bootstrap class
+
+### persited mutable using useRef() method
+```JavaScript
+    import React, { useRef } from 'react';
+    const ViewRsult = () => {
+   // How to change the useRef() initial value
+   const counter = useRef(0);
+   const incCounter = () => {
+    console.log(counter.current++);
+   }
+    return (
+       <div style={{padding:"50px"}}>
+          <button onClick={()=> incCounter()}>Change Me</button>
+       </div>
+    );
+};
+export default ViewRsult;
+```

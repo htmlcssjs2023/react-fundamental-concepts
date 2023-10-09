@@ -1,16 +1,13 @@
-import React from 'react';
+import React, { useRef } from 'react';
 const ViewRsult = () => {
-    const submitForm = (e) =>{
-        e.preventDefault();
-        alert("Click Me");
-    }
+   // How to change the useRef() initial value
+   const counter = useRef(0);
+   const incCounter = () => {
+    console.log(counter.current++);
+   }
     return (
-       <div>
-            {/* <form action=""onSubmit={}></form> */}
-            <form onSubmit={submitForm}>
-                <input type="text" />
-                <button>Submit</button>
-            </form>
+       <div style={{padding:"50px"}}>
+          <button onClick={()=> incCounter()}>Change Me</button>
        </div>
     );
 };
