@@ -364,7 +364,7 @@ export default ViewRsult;
 - [bootstrap](https://www.npmjs.com/package/bootstrap)
 - use bootstrap class
 
-### persited mutable using useRef() method
+### persist mutable using useRef() method
 ```JavaScript
     import React, { useRef } from 'react';
     const ViewRsult = () => {
@@ -379,5 +379,91 @@ export default ViewRsult;
        </div>
     );
 };
+export default ViewRsult;
+```
+- Change the useRef() initial value. that's call persist mutable.
+
+### Caching expensive data using useRef();
+```JavaScript
+    import React, { useRef } from 'react';
+const ViewRsult = () => {
+      const apiData = useRef(null);
+      const pTag = useRef();
+
+    // Fetching Data
+      const fetchData = async ()=>{
+         const response = await fetch('https://dummyjson.com/products')
+         // caching api calling data into apiData reference
+         apiData.current = await response.json();
+      }
+    // Showing data into pTag reference
+      const showData = ()=>{
+         pTag.current.innerText = JSON.stringify(apiData.current)
+      }
+
+    return (
+       <div style={{padding:"50px"}}>
+         <p ref={pTag}></p>
+
+        <button onClick={()=>fetchData()} className='btn btn-success'>Call API</button>
+        <button onClick={showData} className='btn btn-primary m-2'>Show Data</button>
+       </div>
+    );
+};
+export default ViewRsult;
+```
+
+### Make a To Do List 
+```JavaScript
+    import { useState } from "react";
+const ViewRsult = () => {
+   const [list, setList] = useState([]);
+   const [item,setItem] = useState("");
+   console.log(list);
+  
+   const addList = ()=>{
+      list.push(item);
+      setList([...list]);
+   }
+   const removeItemFromList =(index)=>{
+      list.splice(index,1)
+      setList([...list])
+
+   }
+    return (
+       <div style={{padding:"50px"}}>
+         <div className="todo-list col-md-4">
+            <input 
+            className="form-control border border-warning" 
+            type="text"
+            onChange={(e)=>{setItem(e.target.value)}}
+            
+            />
+            <button 
+            className="btn btn-primary mt-2"
+            onClick={()=>{addList()}}
+            >Add Item</button>
+         </div>
+         <div className="item-box  p-2 mt-3 rounded col-md-6">
+            {
+               list.length !== 0?
+               list.map((element,i)=>{
+                  return (
+                     <div>
+                        <li
+                        style={{width:"80%", display:"inline-block"}}
+                        className="list-group-item border border-primary p-2 mt-3 rounded" 
+                        key={i.toString()}
+                        >{element}</li>
+                        <span onClick={()=>{removeItemFromList(i)}} className="btn btn-warning m-2">❌</span>
+                     </div>
+                  )
+               }):<span></span>
+            }
+         </div>
+      </div>
+    );
+};
+
 export default ViewRsult;
 ```
