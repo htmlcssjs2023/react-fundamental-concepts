@@ -10,6 +10,7 @@ import Home from './components/Home/Home';
 import ViewRsult from './components/ViewResult/ViewRsult';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'milligram/dist/milligram.min.css';
 
 
 const router = createBrowserRouter([
